@@ -110,6 +110,7 @@ export function initThreeScene() {
   // Subtle mouse & scroll tracking
   const mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
   let scrollProgress = 0;
+  let maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
 
   const onMouseMove = (event) => {
     mouse.targetX = (event.clientX / window.innerWidth - 0.5) * 2;
@@ -117,11 +118,11 @@ export function initThreeScene() {
   };
 
   const onScroll = () => {
-    const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
     scrollProgress = window.scrollY / maxScroll;
   };
 
   const onResize = () => {
+    maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -155,15 +156,26 @@ export function initThreeScene() {
 
     renderer.render(scene, camera);
 
-    if (!prefersReducedMotion) {
+    if (!prefersReducedMotion && !document.hidden) {
       rafId = window.requestAnimationFrame(renderFrame);
+    } else {
+      rafId = null;
     }
   };
 
+  const onVisibilityChange = () => {
+    if (!document.hidden && !prefersReducedMotion && rafId === null) {
+      clock.getDelta();
+      renderFrame();
+    }
+  };
+
+  document.addEventListener('visibilitychange', onVisibilityChange);
   renderFrame();
 
   const dispose = () => {
     if (rafId) window.cancelAnimationFrame(rafId);
+    document.removeEventListener('visibilitychange', onVisibilityChange);
     window.removeEventListener('mousemove', onMouseMove);
     window.removeEventListener('scroll', onScroll);
     window.removeEventListener('resize', onResize);
