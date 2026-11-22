@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en" class="is-loading">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hamdan Kaleem | GhosT'ers Solution — The Digital Architect</title>
+  <meta name="description" content="Hamdan Kaleem — Expert Vibe Coder, Software Developer, Desktop Application Developer, and Cybersecurity Enthusiast operating under GhosT'ers Solution. Building digital experiences and engineering real solutions." />
+  <meta name="keywords" content="Hamdan Kaleem, GhosT'ers Solution, Software Developer, Desktop Applications, Electron, Python, Flask, Three.js, Cybersecurity, Portfolio" />
+  <meta name="author" content="Hamdan Kaleem — GhosT'ers Solution" />
+  <meta name="theme-color" content="#05070B" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Hamdan Kaleem | GhosT'ers Solution — The Digital Architect" />
+  <meta property="og:description" content="Building Digital Experiences. Engineering Real Solutions. From Desktop Applications to Immersive Web Experiences." />
+  <meta property="og:site_name" content="GhosT'ers Solution" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Hamdan Kaleem | GhosT'ers Solution" />
+  <meta name="twitter:description" content="Expert Vibe Coder | Software Developer | Desktop Applications | Cybersecurity Enthusiast" />
+
+  <link rel="icon" type="image/svg+xml" href="./assets/icons/favicon.svg" />
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="/src/css/main.css" />
+  <link rel="stylesheet" href="/src/css/components.css" />
+  <link rel="stylesheet" href="/src/css/animations.css" />
+  <link rel="stylesheet" href="/src/css/responsive.css" />
+</head>
+<body>
+  <!-- Skip to content for accessibility -->
+  <a href="#hero" class="skip-link">Skip to main content</a>
+
+  <!-- Cinematic Preloader -->
+  <div id="preloader" class="preloader" aria-hidden="false" role="status" aria-label="Loading GhosT'ers Solution">
+    <div class="preloader__inner">
+      <div class="preloader__emblem">
+        <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <path class="preloader__hex-outer" d="M32 4L56 18V46L32 60L8 46V18L32 4Z" stroke="url(#loaderGrad)" stroke-width="1.5" />
+          <path class="preloader__hex-inner" d="M32 16L45 23.5V38.5L32 46L19 38.5V23.5L32 16Z" stroke="#00D9FF" stroke-width="1.2" />
+          <circle cx="32" cy="31" r="3" fill="#00D9FF" />
+          <defs>
+            <linearGradient id="loaderGrad" x1="8" y1="4" x2="56" y2="60" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#00D9FF" />
+              <stop offset="0.5" stop-color="#287BFF" />
+              <stop offset="1" stop-color="#8055FF" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <div class="preloader__brand">GHOS T'ERS SOLUTION</div>
+      <div class="preloader__sub">INITIALIZING DIGITAL ARCHITECTURE</div>
+      <div class="preloader__bar">
+        <div class="preloader__bar-fill" id="preloader-fill"></div>
+      </div>
+      <div class="preloader__percent" id="preloader-percent">00%</div>
+    </div>
+  </div>
+
+  <!-- Global WebGL 3D Ambient Canvas (graceful fallback if WebGL unavailable) -->
+  <canvas id="webgl-canvas" class="webgl-canvas" aria-hidden="true"></canvas>
+
+  <!-- Subtle Custom Cursor Aura (Desktop pointer devices only) -->
+  <div class="cursor-aura" id="cursor-aura" aria-hidden="true"></div>
+  <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
+
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress" aria-hidden="true">
+    <div class="scroll-progress__bar" id="scroll-progress-bar"></div>
+  </div>
+
+  <!-- Floating Navigation -->
+  <header class="site-header" id="site-header">
+    <nav class="navbar container" aria-label="Primary Navigation">
+      <a href="#hero" class="nav-brand" aria-label="GhosT'ers Solution Home">
+        <span class="nav-brand__icon" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none">
+            <path d="M16 3L28 9.8V22.2L16 29L4 22.2V9.8L16 3Z" stroke="#00D9FF" stroke-width="1.5" />
+            <path d="M16 9.5L22 13V19L16 22.5L10 19V13L16 9.5Z" stroke="#8055FF" stroke-width="1.2" />
+            <circle cx="16" cy="16" r="2.2" fill="#00D9FF" />
+          </svg>
+        </span>
+        <span class="nav-brand__text">
+          <span class="nav-brand__name">GHOS T'ERS</span>
+          <span class="nav-brand__tag">SOLUTION</span>
+        </span>
+      </a>
+
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#hero" class="nav-link is-active" data-section="hero">Home</a></li>
+        <li><a href="#about" class="nav-link" data-section="about">About</a></li>
+        <li><a href="#expertise" class="nav-link" data-section="expertise">Expertise</a></li>
+        <li><a href="#projects" class="nav-link" data-section="projects">Projects</a></li>
+        <li><a href="#contact" class="nav-link" data-section="contact">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="#contact" class="btn btn--ghost btn--sm magnetic" data-magnetic>
+          <span>Initiate Talk</span>
+          <i data-lucide="arrow-up-right" aria-hidden="true"></i>
+        </a>
+        <button
+          type="button"
+          class="nav-toggle"
+          id="nav-toggle"
+          aria-label="Toggle navigation menu"
+          aria-expanded="false"
+          aria-controls="mobile-drawer"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
+    <div class="mobile-drawer__backdrop" data-close-drawer></div>
+    <div class="mobile-drawer__panel">
+      <div class="mobile-drawer__header">
+        <span class="mono-label">NAVIGATION // 01–05</span>
+        <button type="button" class="icon-btn" id="mobile-drawer-close" aria-label="Close navigation menu">
+          <i data-lucide="x" aria-hidden="true"></i>
+        </button>
+      </div>
+      <ul class="mobile-drawer__links">
+        <li><a href="#hero" class="mobile-link" data-section="hero"><span>01</span> Home</a></li>
+        <li><a href="#about" class="mobile-link" data-section="about"><span>02</span> About</a></li>
+        <li><a href="#expertise" class="mobile-link" data-section="expertise"><span>03</span> Expertise</a></li>
+        <li><a href="#projects" class="mobile-link" data-section="projects"><span>04</span> Projects</a></li>
+        <li><a href="#contact" class="mobile-link" data-section="contact"><span>05</span> Contact</a></li>
+      </ul>
+      <div class="mobile-drawer__footer">
+        <p class="mono-label">GHOS T'ERS SOLUTION</p>
+        <p class="text-muted">Exploring Technology. Engineering Possibilities.</p>
+      </div>
+    </div>
+  </div>
+
+  <main id="main-content">
+    <!-- ================================================================
+         SECTION 01 — THE AWAKENING / HERO
+         ================================================================ -->
+    <section id="hero" class="section section--hero" aria-label="Introduction">
+      <!-- Cinematic Video 01 — The Awakening -->
+      <div class="hero-media" aria-hidden="true">
+        <video
+          id="video-awakening"
+          class="hero-media__video"
+          autoplay
+          muted
+          playsinline
+          preload="auto"
+          data-video-role="awakening"
+        >
+          <source src="./assets/videos/awakening.mp4" type="video/mp4" />
+        </video>
+        <div class="hero-media__veil"></div>
+        <div class="hero-media__vignette"></div>
+      </div>
+
+      <!-- Interactive Character Hotspot & Floating Name Prompt -->
+      <div
+        class="character-hotspot"
+        id="character-hotspot"
+        tabindex="0"
+        role="button"
+        aria-label="Hamdan Kaleem — Digital Architect"
+      >
+        <div class="character-prompt" id="character-prompt" aria-hidden="true">
+          <div class="character-prompt__header">
+            <span class="character-prompt__dot"></span>
+            <span>IDENTITY // VERIFIED</span>
+          </div>
+          <div class="character-prompt__name">Hamdan Kaleem</div>
+          <div class="character-prompt__sub">GhosT'ers Solution &bull; Digital Architect</div>
+        </div>
+      </div>
+
+      <div class="container hero__container">
+        <div class="hero__content" data-parallax="0.06">
+          <!-- Status Row -->
+          <div class="hero__telemetry hero-animate">
+            <span class="brand-kicker">GHOS T'ERS SOLUTION</span>
+            <span class="telemetry-divider" aria-hidden="true"></span>
+            <span class="status-pill" id="availability-pill" hidden>
+              <span class="status-pill__dot" aria-hidden="true"></span>
+              <span id="availability-text">Open to Collaborations</span>
+            </span>
+          </div>
+
+          <!-- Spaced Name Title -->
+          <h1 class="hero__name hero-animate">
+            <span class="hero__name-spaced">H A M D A N &nbsp; K A L E E M</span>
+          </h1>
+
+          <!-- Primary Role Tag -->
+          <div class="hero__identity hero-animate">
+            <span class="identity-badge">
+              <i data-lucide="sparkles" aria-hidden="true"></i>
+              <span>Expert Vibe Coder</span>
+            </span>
+            <p class="hero__roles">
+              Software Developer <span aria-hidden="true">|</span> Desktop Applications <span aria-hidden="true">|</span> Cybersecurity Enthusiast
+            </p>
+          </div>
+
+          <!-- Primary & Secondary Headlines -->
+          <p class="hero__headline hero-animate">
+            Building Digital Experiences.<br />
+            <span class="text-gradient">Engineering Real Solutions.</span>
+          </p>
+
+          <p class="hero__subheadline hero-animate">
+            From Desktop Applications to Immersive Web Experiences.
+          </p>
+
+          <!-- CTAs -->
+          <div class="hero__actions hero-animate">
+            <a href="#projects" class="btn btn--primary magnetic" data-magnetic>
+              <span>EXPLORE MY WORK</span>
+              <i data-lucide="arrow-down-right" aria-hidden="true"></i>
+            </a>
+            <a href="#contact" class="btn btn--secondary magnetic" data-magnetic>
+              <span>LET'S CONNECT</span>
+              <i data-lucide="send" aria-hidden="true"></i>
+            </a>
+          </div>
+
+          <!-- Social & System Metadata -->
+          <div class="hero__meta hero-animate">
+            <div class="hero__socials" id="hero-socials" aria-label="Social links"></div>
+            <div class="hero__hud-labels" aria-hidden="true">
+              <span class="hud-chip">SYS // DIGITAL ARCHITECT</span>
+              <span class="hud-chip">FOCUS // DESKTOP + WEB + CYBERSEC</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Subtle Scroll Indicator -->
+      <a href="#about" class="scroll-indicator" aria-label="Scroll to About section">
+        <span class="scroll-indicator__label">SCROLL TO EXPLORE</span>
+        <span class="scroll-indicator__track">
+          <span class="scroll-indicator__thumb"></span>
+        </span>
+      </a>
+    </section>
+
+    <!-- ================================================================
+         SECTION 02 — THE IDENTITY / ABOUT ME
+         ================================================================ -->
+    <section id="about" class="section section--about" aria-labelledby="about-heading">
+      <!-- Cinematic Video 02 — The Identity -->
+      <div class="section-media section-media--about" aria-hidden="true">
+        <video
+          id="video-identity"
+          class="section-media__video"
+          muted
+          loop
+          playsinline
+          preload="none"
+          data-video-role="identity"
+          data-lazy-video
+        >
+          <source data-src="./assets/videos/identity.mp4" type="video/mp4" />
+        </video>
+        <div class="section-media__veil section-media__veil--about"></div>
+      </div>
+
+      <div class="container section__inner">
+        <div class="section-header reveal-up">
+          <span class="section-index">02 // THE IDENTITY</span>
+          <h2 id="about-heading" class="section-title">MORE THAN JUST CODE.</h2>
+          <p class="section-lead">
+            I'm Hamdan Kaleem, a developer driven by creativity, technology and problem-solving. I enjoy transforming ideas into functional software products, building desktop applications and exploring the evolving world of cybersecurity.
+          </p>
+        </div>
+
+        <!-- Editorial Grid -->
+        <div class="about-grid">
+          <!-- Main Narrative Panel -->
+          <article class="glass-panel about-story reveal-up">
+            <div class="panel-header">
+              <span class="mono-label">PROFILE // ARCHITECT'S NOTE</span>
+              <span class="panel-dot" aria-hidden="true"></span>
+            </div>
+            <p class="about-story__intro">
+              I'm Hamdan Kaleem — an <strong>Expert Vibe Coder</strong>, software developer and cybersecurity enthusiast. I build desktop applications, management systems, billing solutions and modern digital experiences. My passion lies in transforming ideas into functional, polished and meaningful software.
+            </p>
+            <div class="about-pillars">
+              <div class="pillar-card">
+                <div class="pillar-card__icon"><i data-lucide="ghost" aria-hidden="true"></i></div>
+                <div>
+                  <h3>GhosT'ers Philosophy</h3>
+                  <p>A fusion of <em>Ghost</em> and <em>Testers</em> — observing deeply, exploring problems from the inside out, and engineering resilient, secure digital solutions.</p>
+                </div>
+              </div>
+              <div class="pillar-card">
+                <div class="pillar-card__icon"><i data-lucide="layers" aria-hidden="true"></i></div>
+                <div>
+                  <h3>Creative Engineering</h3>
+                  <p>Bridging pragmatic desktop software engineering with expressive, fluid user interfaces so every tool feels intentional, clear, and responsive.</p>
+                </div>
+              </div>
+              <div class="pillar-card">
+                <div class="pillar-card__icon"><i data-lucide="shield-check" aria-hidden="true"></i></div>
+                <div>
+                  <h3>Cybersecurity Journey</h3>
+                  <p>Currently pursuing a <strong>BS in Cyber Security</strong> — actively studying digital forensics, networking fundamentals, and Red/Blue Team concepts.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Holographic Telemetry & Timeline -->
+          <aside class="glass-panel about-timeline-panel reveal-up">
+            <div class="panel-header">
+              <span class="mono-label">TRAJECTORY // DEVELOPMENT JOURNEY</span>
+              <span class="mono-label mono-label--accent">ONGOING</span>
+            </div>
+
+            <div class="timeline" id="about-timeline">
+              <div class="timeline__rail" aria-hidden="true">
+                <div class="timeline__rail-fill" id="timeline-rail-fill"></div>
+              </div>
+
+              <div class="timeline__item">
+                <div class="timeline__node" aria-hidden="true"></div>
+                <div class="timeline__content">
+                  <span class="timeline__phase">PHASE 01 // FOUNDATION</span>
+                  <h3>Software &amp; Web Foundations</h3>
+                  <p>Built fluency in HTML5, CSS3, JavaScript, Python, and structured problem-solving — turning curiosity into clean, functional code.</p>
+                </div>
+              </div>
+
+              <div class="timeline__item">
+                <div class="timeline__node" aria-hidden="true"></div>
+                <div class="timeline__content">
+                  <span class="timeline__phase">PHASE 02 // SYSTEMS</span>
+                  <h3>Desktop &amp; Business Applications</h3>
+                  <p>Focused on practical desktop software with Electron.js, Node.js, .NET Windows Forms, SQLite, and MySQL for inventory, billing, and institutional workflows.</p>
+                </div>
+              </div>
+
+              <div class="timeline__item">
+                <div class="timeline__node" aria-hidden="true"></div>
+                <div class="timeline__content">
+                  <span class="timeline__phase">PHASE 03 // IDENTITY</span>
+                  <h3>GhosT'ers Solution</h3>
+                  <p>Established a personal engineering brand centered on creative software architecture, interactive web experiences, and purposeful product craft.</p>
+                </div>
+              </div>
+
+              <div class="timeline__item">
+                <div class="timeline__node timeline__node--pulse" aria-hidden="true"></div>
+                <div class="timeline__content">
+                  <span class="timeline__phase">PHASE 04 // PRESENT</span>
+                  <h3>BS Cyber Security &amp; Forensics Exploration</h3>
+                  <p>Advancing academic studies in Cyber Security while building learning-focused forensic tools like ShadowTrace and exploring security-first software design.</p>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         SECTION 03 — THE ENGINEERING / EXPERTISE
+         ================================================================ -->
+    <section id="expertise" class="section section--expertise" aria-labelledby="expertise-heading">
+      <!-- Cinematic Video 03 — The Engineering (cued to engineering chamber 10.5s–19.8s) -->
+      <div class="section-media section-media--expertise" aria-hidden="true">
+        <video
+          id="video-engineering"
+          class="section-media__video"
+          muted
+          playsinline
+          preload="none"
+          data-video-role="engineering"
+          data-lazy-video
+          data-start-time="10.5"
+          data-end-time="19.5"
+        >
+          <source data-src="./assets/videos/engineering.mp4" type="video/mp4" />
+        </video>
+        <div class="section-media__veil section-media__veil--expertise"></div>
+      </div>
+
+      <div class="container section__inner">
+        <div class="section-header reveal-up">
+          <span class="section-index">03 // THE ENGINEERING</span>
+          <h2 id="expertise-heading" class="section-title">ENGINEERING IDEAS INTO REALITY.</h2>
+          <p class="section-lead">
+            An interconnected technical ecosystem spanning native desktop applications, backend APIs, relational databases, interactive 3D frontends, and ongoing cybersecurity exploration.
+          </p>
+        </div>
+
+        <!-- Interactive Engineering Lab -->
+        <div class="lab-shell glass-panel reveal-up" id="engineering-lab">
+          <div class="lab-topbar">
+            <div class="lab-topbar__left">
+              <span class="lab-indicator" aria-hidden="true"></span>
+              <span class="mono-label">GHOS T'ERS // TECHNICAL ECOSYSTEM MATRIX</span>
+            </div>
+            <div class="lab-topbar__right">
+              <span class="mono-label" id="lab-active-code">NODE // 01 OF 06</span>
+            </div>
+          </div>
+
+          <div class="lab-body">
+            <!-- Left: Interactive Domain Nodes -->
+            <div class="lab-nodes" role="tablist" aria-label="Technology expertise domains" id="lab-nodes">
+              <button type="button" class="lab-node is-active" role="tab" aria-selected="true" data-domain="desktop">
+                <span class="lab-node__index">01</span>
+                <span class="lab-node__icon"><i data-lucide="monitor-cog" aria-hidden="true"></i></span>
+                <span class="lab-node__info">
+                  <span class="lab-node__title">Desktop Development</span>
+                  <span class="lab-node__sub">Electron.js &bull; .NET WinForms &bull; Node.js</span>
+                </span>
+                <i data-lucide="chevron-right" class="lab-node__arrow" aria-hidden="true"></i>
+              </button>
+
+              <button type="button" class="lab-node" role="tab" aria-selected="false" data-domain="backend">
+                <span class="lab-node__index">02</span>
+                <span class="lab-node__icon"><i data-lucide="server" aria-hidden="true"></i></span>
+                <span class="lab-node__info">
+                  <span class="lab-node__title">Backend Engineering</span>
+                  <span class="lab-node__sub">Python &bull; Flask &bull; Node.js &bull; REST APIs</span>
+                </span>
+                <i data-lucide="chevron-right" class="lab-node__arrow" aria-hidden="true"></i>
+              </button>
+
+              <button type="button" class="lab-node" role="tab" aria-selected="false" data-domain="database">
+                <span class="lab-node__index">03</span>
+                <span class="lab-node__icon"><i data-lucide="database" aria-hidden="true"></i></span>
+                <span class="lab-node__info">
+                  <span class="lab-node__title">Database Management</span>
+                  <span class="lab-node__sub">SQLite &bull; MySQL &bull; Relational Modeling</span>
+                </span>
+                <i data-lucide="chevron-right" class="lab-node__arrow" aria-hidden="true"></i>
+              </button>
+
+              <button type="button" class="lab-node" role="tab" aria-selected="false" data-domain="frontend">
+                <span class="lab-node__index">04</span>
+                <span class="lab-node__icon"><i data-lucide="sparkles" aria-hidden="true"></i></span>
+                <span class="lab-node__info">
+                  <span class="lab-node__title">Frontend Development</span>
+                  <span class="lab-node__sub">HTML5 &bull; CSS3 &bull; JS &bull; Three.js &bull; GSAP</span>
+                </span>
+                <i data-lucide="chevron-right" class="lab-node__arrow" aria-hidden="true"></i>
+              </button>
+
+              <button type="button" class="lab-node" role="tab" aria-selected="false" data-domain="solutions">
+                <span class="lab-node__index">05</span>
+                <span class="lab-node__icon"><i data-lucide="boxes" aria-hidden="true"></i></span>
+                <span class="lab-node__info">
+                  <span class="lab-node__title">Business Software Solutions</span>
+                  <span class="lab-node__sub">Inventory &bull; Institution &bull; Billing Systems</span>
+                </span>
+                <i data-lucide="chevron-right" class="lab-node__arrow" aria-hidden="true"></i>
+              </button>
+
+              <button type="button" class="lab-node" role="tab" aria-selected="false" data-domain="cybersecurity">
+                <span class="lab-node__index">06</span>
+                <span class="lab-node__icon"><i data-lucide="shield" aria-hidden="true"></i></span>
+                <span class="lab-node__info">
+                  <span class="lab-node__title">Cybersecurity Exploration</span>
+                  <span class="lab-node__sub">BS Cyber Security &bull; Forensics &bull; Red/Blue</span>
+                </span>
+                <i data-lucide="chevron-right" class="lab-node__arrow" aria-hidden="true"></i>
+              </button>
+            </div>
+
+            <!-- Right: Holographic Architecture Inspector -->
+            <div class="lab-inspector" id="lab-inspector" role="tabpanel" aria-live="polite">
+              <div class="lab-inspector__visual">
+                <svg class="lab-topology" id="lab-topology" viewBox="0 0 460 190" fill="none" aria-hidden="true"></svg>
+              </div>
+              <div class="lab-inspector__content" id="lab-inspector-content">
+                <!-- Dynamically populated by interactions.js -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Compact 6-Domain Overview Matrix (accessible scannable cards) -->
+        <div class="expertise-cards-grid reveal-up" id="expertise-cards-grid">
+          <!-- Populated cleanly from the same structured expertise data -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         SECTION 04 — THE CREATIONS / PROJECTS
+         ================================================================ -->
+    <section id="projects" class="section section--projects" aria-labelledby="projects-heading">
+      <div class="container section__inner">
+        <div class="section-header reveal-up">
+          <span class="section-index">04 // THE CREATIONS</span>
+          <h2 id="projects-heading" class="section-title">BUILT WITH PURPOSE. DESIGNED TO SOLVE.</h2>
+          <p class="section-lead">
+            Real software workflows, desktop application architectures, and learning-focused forensic systems — presented transparently with clear distinction between active builds and architectural concepts.
+          </p>
+        </div>
+
+        <div class="projects-showcase" id="projects-showcase">
+          <!-- Rendered by projects.js with rich bespoke interactive UI mockups -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         SECTION 05 — THE CONNECTION / CONTACT
+         ================================================================ -->
+    <section id="contact" class="section section--contact" aria-labelledby="contact-heading">
+      <div class="contact-ambient" aria-hidden="true">
+        <div class="contact-ambient__glow contact-ambient__glow--cyan"></div>
+        <div class="contact-ambient__glow contact-ambient__glow--violet"></div>
+      </div>
+
+      <div class="container section__inner">
+        <div class="section-header reveal-up">
+          <span class="section-index">05 // THE CONNECTION</span>
+          <h2 id="contact-heading" class="section-title">HAVE AN IDEA? LET'S BUILD SOMETHING.</h2>
+          <p class="section-lead">
+            Whether it's a desktop application, a business management solution, a web experience or a technology-driven idea, let's turn it into something meaningful.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <!-- Contact Channels -->
+          <div class="glass-panel contact-info reveal-up">
+            <div class="panel-header">
+              <span class="mono-label">CHANNELS // DIRECT ACCESS</span>
+              <span class="panel-dot" aria-hidden="true"></span>
+            </div>
+
+            <div class="contact-channels" id="contact-channels">
+              <!-- Populated from config.js -->
+            </div>
+          </div>
+
+          <!-- Contact Form -->
+          <form class="glass-panel contact-form reveal-up" id="contact-form" novalidate>
+            <div class="panel-header">
+              <span class="mono-label">TRANSMISSION // SEND MESSAGE</span>
+              <span class="mono-label mono-label--accent" id="contact-mode-label">DIRECT MAILTO</span>
+            </div>
+
+            <div class="form-row">
+              <div class="form-field">
+                <label for="contact-name">Your Name</label>
+                <input type="text" id="contact-name" name="name" placeholder="e.g. Alex Mercer" autocomplete="name" required />
+                <span class="form-error" id="error-name" role="alert"></span>
+              </div>
+
+              <div class="form-field">
+                <label for="contact-email">Email Address</label>
+                <input type="email" id="contact-email" name="email" placeholder="you@domain.com" autocomplete="email" required />
+                <span class="form-error" id="error-email" role="alert"></span>
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label for="contact-subject">Subject</label>
+              <input type="text" id="contact-subject" name="subject" placeholder="Desktop App, Management System, or Web Experience" required />
+              <span class="form-error" id="error-subject" role="alert"></span>
+            </div>
+
+            <div class="form-field">
+              <label for="contact-message">Project Details / Message</label>
+              <textarea id="contact-message" name="message" rows="5" placeholder="Tell me about what you want to build, the problem you're solving, or how we can collaborate..." required></textarea>
+              <span class="form-error" id="error-message" role="alert"></span>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn--primary magnetic" id="contact-submit" data-magnetic>
+                <span class="btn__label">TRANSMIT MESSAGE</span>
+                <i data-lucide="send" aria-hidden="true"></i>
+              </button>
+              <p class="form-hint" id="contact-hint"></p>
+            </div>
+
+            <div class="form-feedback" id="form-feedback" role="status" aria-live="polite" hidden></div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <div class="footer__logo">GHOS T'ERS SOLUTION</div>
+        <p class="footer__tagline">"Exploring Technology. Engineering Possibilities."</p>
+      </div>
+      <div class="footer__meta">
+        <p>&copy; <span id="footer-year"></span> Hamdan Kaleem. Engineered with precision.</p>
+        <a href="#hero" class="footer__top" aria-label="Back to top">
+          <span>Back to Top</span>
+          <i data-lucide="arrow-up" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Project Detail Modal -->
+  <div class="modal" id="project-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
+    <div class="modal__backdrop" data-close-modal></div>
+    <div class="modal__dialog glass-panel" id="modal-dialog" data-lenis-prevent>
+      <button type="button" class="icon-btn modal__close" id="modal-close" aria-label="Close project details">
+        <i data-lucide="x" aria-hidden="true"></i>
+      </button>
+      <div class="modal__body" id="modal-body">
+        <!-- Dynamically populated by projects.js -->
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/js/main.js"></script>
+</body>
+</html>

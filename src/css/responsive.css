@@ -1,0 +1,111 @@
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS (DESKTOP, TABLET, MOBILE, TOUCH)
+   ========================================================================== */
+
+@media (max-width: 1080px) {
+  .about-grid,
+  .lab-body,
+  .project-card,
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lab-nodes {
+    border-right: none;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .project-card--reverse .project-card__visual {
+    order: 0;
+  }
+
+  .expertise-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 860px) {
+  .nav-links,
+  .nav-actions .btn {
+    display: none;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+  }
+
+  .hero-media__video {
+    object-position: 68% center;
+    opacity: 0.78;
+  }
+
+  .character-hotspot {
+    display: none;
+  }
+
+  .hero-media__veil {
+    background:
+      linear-gradient(180deg, rgba(5, 7, 11, 0.72) 0%, rgba(5, 7, 11, 0.52) 42%, rgba(5, 7, 11, 0.94) 84%, #05070B 100%);
+  }
+
+  .section {
+    padding: 5.5rem 0;
+  }
+
+  .modal__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 0 1.2rem;
+  }
+
+  .section--hero {
+    padding: calc(var(--nav-height) + 2.25rem) 0 4.5rem;
+  }
+
+  .hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero__actions .btn {
+    width: 100%;
+  }
+
+  .about-story,
+  .about-timeline-panel,
+  .contact-info,
+  .contact-form,
+  .project-card,
+  .modal__dialog {
+    padding: 1.4rem;
+  }
+
+  .expertise-cards-grid,
+  .form-row,
+  .mockup-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .scroll-indicator {
+    display: none;
+  }
+
+  .footer__inner,
+  .footer__meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}
+
+/* Disable custom cursor on touch/coarse pointer devices */
+@media (hover: none), (pointer: coarse) {
+  .cursor-aura,
+  .cursor-dot {
+    display: none !important;
+  }
+}
